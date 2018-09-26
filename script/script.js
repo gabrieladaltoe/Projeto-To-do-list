@@ -8,10 +8,14 @@ const allDone = document.querySelector(".all-done")
 const removeAll = document.querySelector(".remove-all")
 
 
+//DRAG AND DROP
+
 
 
 button.addEventListener("click", function(event){
     event.preventDefault();
+
+    //VALIDAÇÃO DO CAMPO DE TEXTO
 
     if(inputText.value === "" || inputText.value === null || inputText.value === " " || inputText.value === undefined){
         inputText.focus();
@@ -24,17 +28,18 @@ button.addEventListener("click", function(event){
     toDoBox.style.display = "flex";
     toDoBox.style.justifyContent = "space-between";
     toDoBox.style.padding = "0px 10px";
+    toDoBox.setAttribute("id", "drag1")
+    toDoBox.setAttribute("draggable", "true")
+    toDoBox.setAttribute("ondragstart", `drag(event)`)
 
-    // const doneArea = document.createElement("div");
-    // doneArea.innerHTML = (`<input type="checkbox" name="checkbox" id="checkbox">`)
-    //const doneInput = document.createElement("input")
-    //toDoBox.appendChild(doneArea);
-    // if (doneInput == checked ){
-    //     document.querySelector("body").style.backgroundColor  = "#e3f2fd"
-    // };
+
+
 
     const toDoItem = document.createElement("p");
     toDoItem.classList.add("to-do__box-text")
+    toDoItem.setAttribute("id", "drag1")
+    toDoItem.setAttribute("draggable", "true")
+    toDoItem.setAttribute("ondragstart", `drag(event)`)
     toDoItem.innerHTML = inputText.value;
 
     const deleteButton = document.createElement("button")
@@ -45,40 +50,42 @@ button.addEventListener("click", function(event){
     toDoBox.appendChild(deleteButton);
     toDoWrapper.appendChild(toDoBox);
 
+
+//DELATAR ITEM 
     deleteButton.addEventListener("click", function(event2){
         event2.preventDefault()
         toDoBox.remove()
     
     })
 
-    let contador = 1;
 
     toDoBox.addEventListener("click", function(evento3){
 
-        contador++
-
-        if (contador % 2 !== 0){
+        if (toDoItem.classList.contains("to-do__box-text")){
             toDoItem.classList.remove("to-do__box-text");
             toDoItem.classList.add("to-do__box-text_checked");
-        }else {
+        }else if (toDoItem.classList.contains("to-do__box-text_checked")) {
             toDoItem.classList.remove("to-do__box-text_checked");
             toDoItem.classList.add("to-do__box-text");
         }
     
 });
 
+//CLICAR EM TODOS OS ITENS 
     allDone.addEventListener("click", function(e){
 
 
-            if (toDoItem.classList = "to-do__box-text"){
+            if (toDoItem.classList.contains("to-do__box-text")){
                 toDoItem.classList.remove("to-do__box-text");
                 toDoItem.classList.add("to-do__box-text_checked");
-            }else{
+            }else if (toDoItem.classList.contains("to-do__box-text_checked")) {
                 toDoItem.classList.remove("to-do__box-text_checked");
                 toDoItem.classList.add("to-do__box-text");
             }
 
     });
+
+// DELETAR TODOS OS ITENS
 
     removeAll.addEventListener("click", function(event1){
         event1.preventDefault()
@@ -91,6 +98,17 @@ button.addEventListener("click", function(event){
 
 
 
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
 
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.parentNode.appendChild(document.getElementById(data));
+}
 

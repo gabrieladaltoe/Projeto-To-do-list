@@ -10,7 +10,7 @@ body {
     font-size: 16px;
     background-color: #2EC2E8;
     background-image: linear-gradient( to bottom right, #2EC2E8, #eed7ef); 
-    max-width: 100%;
+    max-width: 100vw;
     height: 100vh;
 }
 
@@ -142,3 +142,4 @@ textarea{
     border-radius: 15px;
     font-size: 12px;
 }
+

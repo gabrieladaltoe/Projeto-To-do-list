@@ -17,7 +17,7 @@
                     </label>
                 </div>
                 <div class="to-do__input-area">
-                    <textarea type="text" name="to-do" id="toDoInput" class="to-do__input" placeholder="tarefa1"></textarea>
+                    <textarea type="text" name="to-do" id="toDoInput" class="to-do__input" placeholder="inserir tarefa"></textarea>
                 </div>
                 
                 <button  type="submit" class="button-purpple"> 
@@ -26,13 +26,13 @@
             </form>
         </div>
 
-        <div class="select-all__area"> 
+        <div  class="select-all__area"> 
             <button type="button" class="button-gray all-done">Marcar todos</button>
             <button type="button" class="button-gray remove-all">Deletar todos</button>
 
         </div>
 
-        <div class="to-do__box add-itens">
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="to-do__box add-itens">
         </div>
     </div>
     
