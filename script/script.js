@@ -3,6 +3,13 @@ const inputText = document.getElementById("toDoInput");
 const button = document.querySelector(".button-purpple");
 const toDoWrapper = document.querySelector(".add-itens");
 
+const selectAllArea = document.querySelector(".select-all__area");
+const allDone = document.querySelector(".all-done")
+const removeAll = document.querySelector(".remove-all")
+
+
+
+
 button.addEventListener("click", function(event){
     event.preventDefault();
 
@@ -27,6 +34,7 @@ button.addEventListener("click", function(event){
     // };
 
     const toDoItem = document.createElement("p");
+    toDoItem.classList.add("to-do__box-text")
     toDoItem.innerHTML = inputText.value;
 
     const deleteButton = document.createElement("button")
@@ -43,22 +51,46 @@ button.addEventListener("click", function(event){
     
     })
 
-    let contador = 1
+    let contador = 1;
 
     toDoBox.addEventListener("click", function(evento3){
 
         contador++
 
         if (contador % 2 !== 0){
-            toDoBox.classList.remove("to-do__box-inside");
-            toDoBox.classList.add("to-do__box-inside_checked");
+            toDoItem.classList.remove("to-do__box-text");
+            toDoItem.classList.add("to-do__box-text_checked");
         }else {
-            toDoBox.classList.remove("to-do__box-inside_checked");
-            toDoBox.classList.add("to-do__box-inside");
+            toDoItem.classList.remove("to-do__box-text_checked");
+            toDoItem.classList.add("to-do__box-text");
         }
     
 });
 
+    allDone.addEventListener("click", function(e){
+
+
+            if (toDoItem.classList = "to-do__box-text"){
+                toDoItem.classList.remove("to-do__box-text");
+                toDoItem.classList.add("to-do__box-text_checked");
+            }else{
+                toDoItem.classList.remove("to-do__box-text_checked");
+                toDoItem.classList.add("to-do__box-text");
+            }
+
+    });
+
+    removeAll.addEventListener("click", function(event1){
+        event1.preventDefault()
+    
+        toDoBox.remove()
+    })
+
     inputText.value = ""
 })
+
+
+
+
+
 
