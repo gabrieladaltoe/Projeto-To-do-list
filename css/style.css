@@ -92,6 +92,10 @@ textarea{
     word-break: break-all;
     
 }
+/* 
+.to-do__box-inside.over{
+    border: 2px dashed #000;
+} */
 
 .to-do__box-text{
     text-decoration: line-none;

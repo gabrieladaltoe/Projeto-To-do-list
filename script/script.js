@@ -11,7 +11,6 @@ const removeAll = document.querySelector(".remove-all")
 //DRAG AND DROP
 
 
-
 button.addEventListener("click", function(event){
     event.preventDefault();
 
@@ -20,31 +19,55 @@ button.addEventListener("click", function(event){
     if(inputText.value === "" || inputText.value === null || inputText.value === " " || inputText.value === undefined){
         inputText.focus();
         return false;
-    };
+    }
     
+
+
     const toDoBox = document.createElement("div");
     toDoBox.classList.add("to-do__box-inside")
     toDoBox.style.backgroundColor = "#fff";
     toDoBox.style.display = "flex";
     toDoBox.style.justifyContent = "space-between";
     toDoBox.style.padding = "0px 10px";
-    toDoBox.setAttribute("id", "drag1")
+    toDoBox.setAttribute("id", "drop1")
     toDoBox.setAttribute("draggable", "true")
-    toDoBox.setAttribute("ondragstart", `drag(event)`)
 
+    let dragged
 
+    toDoBox.addEventListener("dragstart", function(event){
+        dragged = event.target
+        console.log(dragged)
 
+    })
+
+    toDoBox.addEventListener("dragend", function(event1){
+        console.log(event1.target)
+        dropItem = event.target
+
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "";
+            dropItem.parentNode.removeChild( dropItem );
+            dropItem.target.appendChild( dragged );
+
+    }
+    
+    
+
+    // toDoBox.setAttribute("dropble", "true")
 
     const toDoItem = document.createElement("p");
     toDoItem.classList.add("to-do__box-text")
-    toDoItem.setAttribute("id", "drag1")
-    toDoItem.setAttribute("draggable", "true")
-    toDoItem.setAttribute("ondragstart", `drag(event)`)
     toDoItem.innerHTML = inputText.value;
 
     const deleteButton = document.createElement("button")
     deleteButton.innerHTML = "x"
     deleteButton.classList.add("button")
+
+
+    // const atributesBox = toDoBox.getAttributeNode("class", "backgroundColor", "display","justifyContent", "padding", "id", "draggable", "ondragstart" ).value
+    // const atributesP = toDoItem.getAttributeNode("class")
+    // const toDoBoxDrag = `${atributesBox}${atributesP}${toDoItem.innerHTML}`
+    // console.log(toDoBoxDrag)
     
     toDoBox.appendChild(toDoItem);
     toDoBox.appendChild(deleteButton);
@@ -98,17 +121,54 @@ button.addEventListener("click", function(event){
 
 
 
-function allowDrop(ev) {
-    ev.preventDefault();
-}
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+// class App {
 
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.parentNode.appendChild(document.getElementById(data));
-}
+//     static init() {
+  
+//       App.box = document.getElementsByClassName('box')[0]
+  
+//       App.box.addEventListener("dragstart", App.dragstart)
+//       App.box.addEventListener("dragend", App.dragend)
+  
+//       const containers = document.getElementsByClassName('holder')
+  
+//       for(const container of containers) {
+//         container.addEventListener("dragover", App.dragover)
+//         container.addEventListener("dragenter", App.dragenter)
+//         container.addEventListener("dragleave", App.dragleave)
+//         container.addEventListener("drop", App.drop)
+//       }
+//     }
+  
+//     static dragstart() {
+//       this.className += " held"
+    
+//       setTimeout(()=>this.className="invisible", 0)
+//     }
 
+//     static dragend() {
+//         this.className = "box"
+//       }
+    
+//       static dragover(e) {
+//         e.preventDefault()
+//       }
+    
+//       static dragenter(e) {
+//         e.preventDefault()
+//         this.className += " hovered"
+//       }
+    
+//       static dragleave() {
+//         this.className = "holder"
+//       }
+    
+//       static drop() {
+//         this.className = "holder"
+//         this.append(App.box)
+//       }
+    
+//     }
+    
+//     document.addEventListener("DOMContentLoaded", App.init)
