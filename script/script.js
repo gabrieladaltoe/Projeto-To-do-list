@@ -8,8 +8,9 @@ const allDone = document.querySelector(".all-done")
 const removeAll = document.querySelector(".remove-all")
 
 
-//DRAG AND DROP
+    //DRAG AND DROP
 
+let dragged
 
 button.addEventListener("click", function(event) {
     event.preventDefault();
@@ -20,8 +21,8 @@ button.addEventListener("click", function(event) {
         inputText.focus();
         return false;
     }
-
-
+    
+    // TO DO LISTS ADICIONADAS 
 
     const toDoBox = document.createElement("div");
     toDoBox.classList.add("to-do__box-inside")
@@ -29,7 +30,9 @@ button.addEventListener("click", function(event) {
     toDoBox.style.display = "flex";
     toDoBox.style.justifyContent = "space-between";
     toDoBox.style.padding = "0px 10px";
-    toDoBox.setAttribute("id", "drop1")
+    // toDoBox.setAttribute("id", `${Math.floor((1 + Math.random()) * 0x10000)
+    //     .toString(16)
+    //     .substring(1)}`)
     toDoBox.setAttribute("draggable", "true")
 
     let dragged
@@ -64,16 +67,31 @@ button.addEventListener("click", function(event) {
     const deleteButton = document.createElement("button")
     deleteButton.innerHTML = "x"
     deleteButton.classList.add("button")
-
-
-    // const atributesBox = toDoBox.getAttributeNode("class", "backgroundColor", "display","justifyContent", "padding", "id", "draggable", "ondragstart" ).value
-    // const atributesP = toDoItem.getAttributeNode("class")
-    // const toDoBoxDrag = `${atributesBox}${atributesP}${toDoItem.innerHTML}`
-    // console.log(toDoBoxDrag)
     
     toDoBox.appendChild(toDoItem);
     toDoBox.appendChild(deleteButton);
     toDoWrapper.appendChild(toDoBox);
+
+    
+// DRAG AND DROP TO DO ITENS
+
+    toDoBox.addEventListener("allowDrop", function(e){
+        e.preventDefault()
+    })
+
+    toDoBox.addEventListener("dragstart", function(e){
+        dragged = e.target.closest('.to-do__box-inside')
+    })
+
+    toDoBox.addEventListener("dragover", function(e){
+        const reference = e.target.closest('.to-do__box-inside');
+        toDoWrapper.insertBefore(dragged, reference)
+    })
+
+
+    toDoBox.addEventListener("drop", function(e){ 
+        console.log('drop')
+   });
 
 
 //DELATAR ITEM 
@@ -82,7 +100,6 @@ button.addEventListener("click", function(event) {
         toDoBox.remove()
     
     })
-
 
     toDoBox.addEventListener("click", function(evento3){
 
@@ -98,8 +115,6 @@ button.addEventListener("click", function(event) {
 
 //CLICAR EM TODOS OS ITENS 
     allDone.addEventListener("click", function(e){
-
-
             if (toDoItem.classList.contains("to-do__box-text")){
                 toDoItem.classList.remove("to-do__box-text");
                 toDoItem.classList.add("to-do__box-text_checked");
