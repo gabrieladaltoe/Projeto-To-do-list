@@ -11,7 +11,7 @@ const removeAll = document.querySelector(".remove-all")
 //DRAG AND DROP
 
 
-button.addEventListener("click", function(event){
+button.addEventListener("click", function(event) {
     event.preventDefault();
 
     //VALIDAÇÃO DO CAMPO DE TEXTO
@@ -20,7 +20,7 @@ button.addEventListener("click", function(event){
         inputText.focus();
         return false;
     }
-    
+
 
 
     const toDoBox = document.createElement("div");
@@ -50,6 +50,8 @@ button.addEventListener("click", function(event){
             dropItem.target.appendChild( dragged );
 
     }
+
+});
     
     
 
@@ -111,14 +113,13 @@ button.addEventListener("click", function(event){
 // DELETAR TODOS OS ITENS
 
     removeAll.addEventListener("click", function(event1){
-        event1.preventDefault()
+        event1.preventDefault();
     
         toDoBox.remove()
     })
 
     inputText.value = ""
-})
-
+});
 
 
 
