@@ -8,7 +8,7 @@ const allDone = document.querySelector(".all-done")
 const removeAll = document.querySelector(".remove-all")
 
 
-//DRAG AND DROP
+    //DRAG AND DROP
 
 let dragged
 
@@ -22,7 +22,7 @@ button.addEventListener("click", function(event){
         return false;
     }
     
-
+    // TO DO LISTS ADICIONADAS 
 
     const toDoBox = document.createElement("div");
     toDoBox.classList.add("to-do__box-inside")
@@ -30,11 +30,25 @@ button.addEventListener("click", function(event){
     toDoBox.style.display = "flex";
     toDoBox.style.justifyContent = "space-between";
     toDoBox.style.padding = "0px 10px";
-    toDoBox.setAttribute("id", `${Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1)}`)
+    // toDoBox.setAttribute("id", `${Math.floor((1 + Math.random()) * 0x10000)
+    //     .toString(16)
+    //     .substring(1)}`)
     toDoBox.setAttribute("draggable", "true")
+
+    const toDoItem = document.createElement("p");
+    toDoItem.classList.add("to-do__box-text")
+    toDoItem.innerHTML = inputText.value;
+
+    const deleteButton = document.createElement("button")
+    deleteButton.innerHTML = "x"
+    deleteButton.classList.add("button")
     
+    toDoBox.appendChild(toDoItem);
+    toDoBox.appendChild(deleteButton);
+    toDoWrapper.appendChild(toDoBox);
+
+    
+// DRAG AND DROP TO DO ITENS
 
     toDoBox.addEventListener("allowDrop", function(e){
         e.preventDefault()
@@ -42,7 +56,6 @@ button.addEventListener("click", function(event){
 
     toDoBox.addEventListener("dragstart", function(e){
         dragged = e.target.closest('.to-do__box-inside')
-        console.log(dragged)
     })
 
     toDoBox.addEventListener("dragover", function(e){
@@ -53,35 +66,7 @@ button.addEventListener("click", function(event){
 
     toDoBox.addEventListener("drop", function(e){ 
         console.log('drop')
-        // event.target.insertAdjacentHTML("beforebegin", document.getElementById(data))
    });
-
-    // for (i=0; i< toDoWrapper.childNodes ; i++){
-    //     i++
-
-    //     contador = drop1
-    //     console.log(drop1)
-    // }
-
-    // toDoBox.setAttribute("dropble", "true")
-
-    const toDoItem = document.createElement("p");
-    toDoItem.classList.add("to-do__box-text")
-    toDoItem.innerHTML = inputText.value;
-
-    const deleteButton = document.createElement("button")
-    deleteButton.innerHTML = "x"
-    deleteButton.classList.add("button")
-
-
-    // const atributesBox = toDoBox.getAttributeNode("class", "backgroundColor", "display","justifyContent", "padding", "id", "draggable", "ondragstart" ).value
-    // const atributesP = toDoItem.getAttributeNode("class")
-    // const toDoBoxDrag = `${atributesBox}${atributesP}${toDoItem.innerHTML}`
-    // console.log(toDoBoxDrag)
-    
-    toDoBox.appendChild(toDoItem);
-    toDoBox.appendChild(deleteButton);
-    toDoWrapper.appendChild(toDoBox);
 
 
 //DELATAR ITEM 
@@ -90,7 +75,6 @@ button.addEventListener("click", function(event){
         toDoBox.remove()
     
     })
-
 
     toDoBox.addEventListener("click", function(evento3){
 
@@ -116,9 +100,6 @@ button.addEventListener("click", function(event){
 
     });
 
-
-
-
 // DELETAR TODOS OS ITENS
 
     removeAll.addEventListener("click", function(event1){
@@ -129,57 +110,3 @@ button.addEventListener("click", function(event){
 
     inputText.value = ""
 })
-
-
-
-
-// class App {
-
-//     static init() {
-  
-//       App.box = document.getElementsByClassName('box')[0]
-  
-//       App.box.addEventListener("dragstart", App.dragstart)
-//       App.box.addEventListener("dragend", App.dragend)
-  
-//       const containers = document.getElementsByClassName('holder')
-  
-//       for(const container of containers) {
-//         container.addEventListener("dragover", App.dragover)
-//         container.addEventListener("dragenter", App.dragenter)
-//         container.addEventListener("dragleave", App.dragleave)
-//         container.addEventListener("drop", App.drop)
-//       }
-//     }
-  
-//     static dragstart() {
-//       this.className += " held"
-    
-//       setTimeout(()=>this.className="invisible", 0)
-//     }
-
-//     static dragend() {
-//         this.className = "box"
-//       }
-    
-//       static dragover(e) {
-//         e.preventDefault()
-//       }
-    
-//       static dragenter(e) {
-//         e.preventDefault()
-//         this.className += " hovered"
-//       }
-    
-//       static dragleave() {
-//         this.className = "holder"
-//       }
-    
-//       static drop() {
-//         this.className = "holder"
-//         this.append(App.box)
-//       }
-    
-//     }
-    
-//     document.addEventListener("DOMContentLoaded", App.init)
